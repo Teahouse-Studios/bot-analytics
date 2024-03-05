@@ -44,8 +44,8 @@ const moduleCallRacingOption: any = {
     legend: {
         show: true
     },
-    animationDuration: 1000,
-    animationDurationUpdate: 1000,
+    animationDuration: 500,
+    animationDurationUpdate: 500,
     animationEasing: 'linear',
     animationEasingUpdate: 'linear',
     graphic: {
@@ -106,7 +106,7 @@ function startModuleCallRacing() {
     update();
     setInterval(function () {
         update();
-    }, 1000);
+    }, 500);
 }
 
 onMounted(() => {
