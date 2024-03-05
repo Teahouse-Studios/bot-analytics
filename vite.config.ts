@@ -1,5 +1,5 @@
 import path from 'path'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 import Components from 'unplugin-vue-components/vite'
@@ -24,15 +24,6 @@ export default defineConfig({
       '~/': `${pathSrc}/`,
     },
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: loadEnv('', process.cwd(), "").DATA_INPUT_BASEURL,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -41,7 +32,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    vue({}),
+    vue(),
     Components({
       // allow auto load markdown components under `./src/components/`
       extensions: ['vue', 'md'],
@@ -72,7 +63,6 @@ export default defineConfig({
       ]
     }),
     nodePolyfills()
-
+    
   ],
-
 })
