@@ -1,8 +1,36 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import * as echarts from 'echarts';
+import { onMounted } from "vue";
 import { useStore } from '../store'
 import { storeToRefs } from 'pinia'
+
+import * as echarts from 'echarts/core';
+import { BarChart } from 'echarts/charts';
+import {
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+  DatasetComponent,
+  TransformComponent,
+  LegendComponent,
+  GraphicComponent
+} from 'echarts/components';
+
+import { LabelLayout, UniversalTransition } from 'echarts/features';
+import { CanvasRenderer } from 'echarts/renderers';
+
+echarts.use([
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+  DatasetComponent,
+  TransformComponent,
+  LegendComponent,
+  GraphicComponent,
+  BarChart,
+  LabelLayout,
+  UniversalTransition,
+  CanvasRenderer
+]);
 
 
 const store = useStore()

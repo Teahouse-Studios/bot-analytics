@@ -1,8 +1,4 @@
 import { defineStore } from "pinia";
-import * as fflate from 'fflate'
-import { fileTypeFromBuffer } from "file-type";
-import axios from "axios";
-
 
 
 export const useStore = defineStore("main", {
@@ -19,11 +15,20 @@ export const useStore = defineStore("main", {
             this.hideScheduleModule = localStorage.getItem('hide_schedule_module') === 'false' ? false : true
         },
         async fetchData() {
+            const axios = await import('axios').then((module) => {
+                return module.default
+            })
+            const unzipSync = await import('fflate').then((module) => {
+                return module.unzipSync
+            })
+            const fileTypeFromBuffer = await import('file-type').then((module) => {
+                return module.fileTypeFromBuffer
+            })
             const response = await axios.get(this.dataInputURL, { responseType: 'arraybuffer' })
             const fileType = await fileTypeFromBuffer(response.data)
             console.log(fileType)
             if (fileType && fileType.ext === 'zip'){
-                const data = fflate.unzipSync(new Uint8Array(response.data))
+                const data = unzipSync(new Uint8Array(response.data))
                 const file = new TextDecoder().decode(data[Object.keys(data)[0]])
                 this.dataInput = JSON.parse(file)
             } else {
