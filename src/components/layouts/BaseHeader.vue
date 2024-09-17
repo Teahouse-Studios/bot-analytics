@@ -4,6 +4,7 @@ import { toggleDark } from "~/composables";
 
 <template>
   <el-menu class="el-menu-demo" mode="horizontal">
+    <el-menu-item index="1">调用统计</el-menu-item>
     <el-menu-item h="full" @click="toggleDark()">
       <button
         class="border-none w-full bg-transparent cursor-pointer"
